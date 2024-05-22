@@ -1,12 +1,12 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import { Header } from '../../../../payload/payload-types'
 import { Gutter } from '../../Gutter'
 
 import classes from './index.module.scss'
-import Image from 'next/image'
 import { HeaderNav } from '../Nav'
 import { noHeaderFooterUrls } from '../../../constants'
 import { usePathname } from 'next/navigation'
@@ -27,7 +27,7 @@ const pathname = usePathname()
             <Link href='/'>
                 {/* <img src="logo-main-cart.svg" alt="logo" /> */}
                 {/* <Image src="http://localhost:3000/LittleShop.svg" alt="logo" /> */}
-                <img src="LittleShop.svg" alt="logo" />
+               <Image src="/LittleShop.svg" alt="logo" width={170} height={50} />
             </Link>
 
             <HeaderNav header={header} />
