@@ -1,7 +1,7 @@
 export const inclusions = [
   {
     title: 'Free Shipping',
-    description: 'Free shipping for order above $150',
+    description: 'Free shipping for order above ฿1000',
     icon: '/assets/icons-bootsteap/box-seam.svg',
   },
   {
@@ -12,7 +12,7 @@ export const inclusions = [
   {
     title: 'Online Support',
     description: '24 hours a day, 7 days a week',
-    icon: '/assets/icons-bootsteap/headset.svg.svg',
+    icon: '/assets/icons-bootsteap/headset.svg',
   },
   {
     title: 'Flexible Payment',
