@@ -13,6 +13,8 @@ import { generateMeta } from '../../_utilities/generateMeta'
 import { Gutter } from '../../_components/Gutter'
 
 import classes from './index.module.scss'
+import Categories from '../../_components/Categories'
+import Promotions from '../../_components/Promotions'
 
 // import Categories from '../../_components/Categories'
 // import Promotion from '../../_components/Promotion'
@@ -67,10 +69,10 @@ export default async function Page({ params: { slug = 'home' } }) {
         <section>
           <Hero {...hero}/>
 
-          {/* <Gutter className={classes.home}>
+          <Gutter className={classes.home}>
             <Categories categories={categories} />
-            <Promotion />
-          </Gutter> */}
+            <Promotions />
+          </Gutter>
         </section>
       ) : (
         <>
