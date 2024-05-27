@@ -5,6 +5,7 @@ import React from 'react'
 import { AuthProvider } from '../_providers/Auth'
 import { CartProvider } from '../_providers/Cart'
 import { ThemeProvider } from './Theme'
+import { FiltersProvider } from './Filters'
 
 export const Providers: React.FC<{
   children: React.ReactNode
@@ -12,7 +13,9 @@ export const Providers: React.FC<{
   return (
     <ThemeProvider>
       <AuthProvider>
-        <CartProvider>{children}</CartProvider>
+        <FiltersProvider>
+          <CartProvider>{children}</CartProvider>
+        </FiltersProvider>
       </AuthProvider>
     </ThemeProvider>
   )

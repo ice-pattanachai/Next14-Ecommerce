@@ -11,6 +11,7 @@ import { PageRange } from '../PageRange'
 import { Pagination } from '../Pagination'
 
 import classes from './index.module.scss'
+import { useFilters } from '../../_providers/Filters'
 
 type Result = {
   docs: (Product | string)[]
@@ -38,6 +39,7 @@ export type Props = {
 }
 
 export const CollectionArchive: React.FC<Props> = props => {
+  const { categoryFilters , sort } = useFilters();
   const {
     categories: catsFromProps,
     className,
@@ -49,7 +51,7 @@ export const CollectionArchive: React.FC<Props> = props => {
     relationTo,
     selectedDocs,
     showPageRange,
-    sort = '-createdAt',
+    // sort = '-createdAt',
   } = props
 
   const [results, setResults] = useState<Result>({
@@ -110,23 +112,26 @@ export const CollectionArchive: React.FC<Props> = props => {
       }, 500)
 
       const searchQuery = qs.stringify(
-        {
-          depth: 1,
-          limit,
-          page,
-          sort,
-          where: {
-            ...(categories
-              ? {
-                  categories: {
-                    in: categories,
-                  },
-                }
-              : {}),
-          },
+      {
+        sort,
+        where: {
+          ...(categoryFilters && categoryFilters?.length > 0
+            ? {
+                categories: {
+                  in:
+                    typeof categoryFilters === 'string'
+                      ? [categoryFilters]
+                      : categoryFilters.map((cat: string) => cat).join(','),
+                },
+              }
+            : {}),
         },
-        { encode: false },
-      )
+        limit,
+        page,
+        depth: 1,
+      },
+      { encode: false },
+    )
 
       const makeRequest = async () => {
         try {
@@ -162,7 +167,7 @@ export const CollectionArchive: React.FC<Props> = props => {
     return () => {
       if (timer) clearTimeout(timer)
     }
-  }, [page, categories, relationTo, onResultChange, sort, limit, populateBy])
+  }, [page, categoryFilters , relationTo, onResultChange, sort, limit, populateBy])
 
   return (
     <div className={[classes.collectionArchive, className].filter(Boolean).join(' ')}>
