@@ -249,9 +249,9 @@ export const CartProvider = props => {
       }, 0) || 0
 
     setTotal({
-      formatted: (newTotal / 100).toLocaleString('en-US', {
+      formatted: (newTotal / 100).toLocaleString('th-TH', {
         style: 'currency',
-        currency: 'USD',
+        currency: 'THB',
       }),
       raw: newTotal,
     })

@@ -40,10 +40,7 @@ export default async function Orders() {
       })
       ?.then(json => json.docs)
   } catch (error) {
-    // when deploying this template on Payload Cloud, this page needs to build before the APIs are live
-    // so swallow the error here and simply render the page with fallback data where necessary
-    // in production you may want to redirect to a 404  page or at least log the error somewhere
-    // console.error(error)
+    console.log("🚀 ~ Orders ~ error:", error)
   }
 
   return (
@@ -64,9 +61,9 @@ export default async function Orders() {
                     <p>{`Ordered On: ${formatDateTime(order.createdAt)}`}</p>
                     <p>
                       {'Total: '}
-                      {new Intl.NumberFormat('en-US', {
+                      {new Intl.NumberFormat('th-TH', {
                         style: 'currency',
-                        currency: 'usd',
+                        currency: 'THB',
                       }).format(order.total / 100)}
                     </p>
                   </div>

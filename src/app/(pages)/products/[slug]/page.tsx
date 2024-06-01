@@ -2,7 +2,6 @@ import React from 'react'
 import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
-
 import { Product, Product as ProductType } from '../../../../payload/payload-types'
 import { fetchDoc } from '../../../_api/fetchDoc'
 import { fetchDocs } from '../../../_api/fetchDocs'
@@ -11,8 +10,6 @@ import { PaywallBlocks } from '../../../_components/PaywallBlocks'
 import { ProductHero } from '../../../_heros/Product'
 import { generateMeta } from '../../../_utilities/generateMeta'
 
-// Force this page to be dynamic so that Next.js does not cache it
-// See the note in '../../../[slug]/page.tsx' about this
 export const dynamic = 'force-dynamic'
 
 export default async function Product({ params: { slug } }) {
@@ -27,7 +24,7 @@ export default async function Product({ params: { slug } }) {
       draft: isDraftMode,
     })
   } catch (error) {
-    console.error(error) // eslint-disable-line no-console
+  console.log("🚀 ~ Product ~ error:", error)
   }
 
   if (!product) {
@@ -85,7 +82,9 @@ export async function generateMetadata({ params: { slug } }): Promise<Metadata> 
       slug,
       draft: isDraftMode,
     })
-  } catch (error) {}
+  } catch (error) {
+    console.log("🚀 ~ generateMetadata ~ error:", error)
+  }
 
   return generateMeta({ doc: product })
 }
